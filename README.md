@@ -1,72 +1,32 @@
 ```
 #include <iostream>
-#include <iomanip>
+#include <vector>
 using namespace std;
 
 int main() {
-    // 定义 4x6 的实型二维数组
-    float scores[4][6] = { 0 };
-    int i, j;
-
-    // 输入原始成绩数据 (3x5)
-    cout << "请输入 3 个学生 5 门课程的成绩：" << endl;
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 5; j++) {
-            cin >> scores[i][j];
-        }
+    int n;
+    cout << "请输入数组元素个数 n: ";
+    if (!(cin >> n) || n <= 0) {
+        cout << "n 非法。\n";
+        return 0;
     }
 
-    // 输出原始成绩数据 (3x5)
-    cout << "\n原始成绩数据 (3x5):" << endl;
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 5; j++) {
-            cout << fixed << setprecision(1) << scores[i][j] << " ";
-        }
-        cout << endl;
+    vector<int> a(n);
+    cout << "请输入 " << n << " 个整数:\n";
+    for (int i = 0; i < n; ++i) cin >> a[i];
+
+    int maxVal = a[0], minVal = a[0];
+    int maxIdx = 0, minIdx = 0;
+    for (int i = 1; i < n; ++i) {
+        if (a[i] > maxVal) { maxVal = a[i]; maxIdx = i; }
+        if (a[i] < minVal) { minVal = a[i]; minIdx = i; }
     }
 
-    // 计算每个学生的平均成绩
-    for (i = 0; i < 3; i++) {
-        float sum = 0;
-        for (j = 0; j < 5; j++) {
-            sum += scores[i][j];
-        }
-        scores[i][5] = sum / 5;
-    }
+    cout << "原始数组元素为: ";
+    for (int i = 0; i < n; ++i) cout << a[i] << (i + 1 == n ? '\n' : ' ');
 
-    // 计算单科的成绩总和
-    for (j = 0; j < 5; j++) {
-        float sum = 0;
-        for (i = 0; i < 3; i++) {
-            sum += scores[i][j];
-        }
-        scores[3][j] = sum;
-    }
-
-    // 计算第 4 行第 6 列的值
-    float total_sum = 0;
-    for (i = 0; i < 3; i++) {
-        total_sum += scores[i][5];
-    }
-    scores[3][5] = total_sum;
-
-    // 输出填入结果后的数组 (4x6)
-    cout << "\n填入结果后的数组 (4x6):" << endl;
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 6; j++) {
-            cout << fixed << setprecision(1) << scores[i][j] << " ";
-        }
-        cout << endl;
-    }
-
-    // 计算单科平均成绩
-    cout << "\n单科平均成绩:" << endl;
-    for (j = 0; j < 5; j++) {
-        float avg = scores[3][j] / 3;
-        cout << fixed << setprecision(4) << avg << " ";
-    }
-    cout << endl;
-
+    cout << "最大值: " << maxVal << "，位置(下标): " << maxIdx << '\n';
+    cout << "最小值: " << minVal << "，位置(下标): " << minIdx << '\n';
     return 0;
 }
 ```
