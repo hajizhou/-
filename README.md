@@ -7,7 +7,7 @@ int main() {
     int n;
     cout << "请输入数组元素个数 n: ";
     if (!(cin >> n) || n <= 0) {
-        cout << "n 非法。\n";
+        cout << "输入不合法\n";
         return 0;
     }
 
